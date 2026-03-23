@@ -23,7 +23,7 @@ jobs:
           pyinstaller --onefile --noconsole logger_plc.py
 
       - name: Upload EXE
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: logger_plc
           path: dist/logger_plc.exe
