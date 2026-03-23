@@ -1,0 +1,29 @@
+name: Build Windows EXE
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          pip install python-snap7 pyinstaller
+
+      - name: Build EXE
+        run: |
+          pyinstaller --onefile --noconsole logger_plc.py
+
+      - name: Upload EXE
+        uses: actions/upload-artifact@v3
+        with:
+          name: logger_plc
+          path: dist/logger_plc.exe
